@@ -38,8 +38,10 @@
   color: #ff1744;
   font-size: 48px;
   position: absolute;
-  top: -20px;
-  right: 5px;
+  min-width: 16px;
+  min-height: 16px;
+  top: -18px;
+  right: 0px;
   cursor: pointer;
 }
 

@@ -16,8 +16,7 @@ const Card = props => (
         </li>
       </ul>
     </div>
-    <span onClick={() => props.removeCard(props.id)} className="remove">
-    </span>
+    <span onClick={() => props.removeCard(props.id)} className="remove">x</span>
   </div>
 );
 
