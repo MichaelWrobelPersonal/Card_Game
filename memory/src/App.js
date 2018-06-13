@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Card from "./components/Card";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
+import Score from "./components/Score";
 import cards from "./cards.json";
 import score from "./components/Score";
 import "./App.css"; 
