@@ -28,14 +28,15 @@ class App extends Component {
 
   getImageUrl = id => {
      const card = this.state.cards.filter(card => card.id === id);
-     return card.image;
-
+     console.log('card ', card)
+     return  card[0] ? card[0].image : null;
   };
 
   setImageUrl = (id, image) => {
     const cards = this.state.cards;
-    const card = cards.filter(cards => card.id === id);
-    card.setState({ image });
+    const card = cards.filter(card => card.id === id);
+    this.setState({ image }); 
+    console.log('card_ ', card);
   };
   // Map over this.state.cards and render a FriendCard component for each card object
   render() {
