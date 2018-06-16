@@ -15,28 +15,33 @@ class App extends Component {
   };
 
   removeCard = id => {
+    this.shuffleCards();
+
     // Filter this.state.cards for cards with an id not equal to the id being removed
-    const cards = this.state.cards.filter(card => card.id !== id);
+    let cards = this.state.cards.filter(card => card.id !== id);
     let score = this.state.score;
 
     score += 1;
 
     // Set this.state.cards equal to the new cards array
-    this.shuffleCards()
+    
     this.setState({ cards, score });
   };
 
   getImageUrl = id => {
-     const card = this.state.cards.filter(card => card.id === id);
+     let card = this.state.cards.filter(card => card.id === id);
      console.log('card ', card)
      return  card[0] ? card[0].image : null;
   };
 
   setImageUrl = (id, image) => {
-    const cards = this.state.cards;
-    const card = cards.filter(card => card.id === id);
-    this.setState({ image }); 
-    console.log('card_ ', card);
+    let cards = this.state.cards;
+    let card = cards.filter(card => card.id === id);
+    console.log('image_', image );
+    console.log('card_', card);
+    card.image = image;
+//    this.setState({ image }); 
+    console.log('card_- ', card);
   };
   // Map over this.state.cards and render a FriendCard component for each card object
   render() {
@@ -101,24 +106,25 @@ class App extends Component {
 
   shuffleCards = () =>
   {
-    let images = [];
+    let unshuffled = [];
+    let shuffled = [];
     let key = 0;
     for(key=0;key<cards.length; key++)
     {
-      images[key] = this.getImageUrl(key);
-      console.log('Preimage: ' + images[key]);
+      unshuffled[key] = this.getImageUrl(key);
+      console.log('Preimage: ' + unshuffled[key]);
     }
 
-    console.log('Pre shuffle: ' + cards);
-    images = this.shuffle(images);
-    console.log('Post shuffle: ' + cards);
+    console.log('Pre shuffle: ' + unshuffled);
+    shuffled = this.shuffle(unshuffled);
+    console.log('Post shuffle: ' + shuffled);
 
     for(key=0;key<cards.length; key++)
     {
-      if (images[key] != null)
+      if (shuffled[key] != null)
       {
-        console.log('Postimage: ' + images[key]);
-        this.setImageUrl(key, images[key]);
+        console.log('Postimage: ' + shuffled[key]);
+        this.setImageUrl(key, shuffled[key]);
       }
     }
   }
