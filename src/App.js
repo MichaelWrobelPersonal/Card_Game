@@ -15,17 +15,33 @@ class App extends Component {
   };
 
   removeCard = id => {
-    this.shuffleCards();
+    let shuffled = this.shuffleCards();
 
     // Filter this.state.cards for cards with an id not equal to the id being removed
     let cards = this.state.cards.filter(card => card.id !== id);
     let score = this.state.score;
-
+    let shuffledCards = cards;
     score += 1;
+    for (let i=0;i<cards.length;i++)
+    {
+      console.log("Cards_--", cards[shuffled[i]]);
+      if( cards[shuffled[i] != null])
+      {
+        let card = this.state.cards.filter(card => card.id === shuffled[i]);
+        card.id = cards[shuffled[i].id];
+        card.location = cards[shuffled[i].location];
+        card.image = cards[shuffled[i].image];
+        card.face = cards[shuffled[i].face];
+        card.suit = cards[shuffled[i].suit];
+        console.log('Cards_---', card); 
+        shuffledCards[i] = card;      
+      }
+    }
 
     // Set this.state.cards equal to the new cards array
-    
-    this.setState({ cards, score });
+    console.log('Cards-___', shuffledCards)
+    this.setState({ shuffledCards, score });
+    console.log('Cards____', shuffledCards)
   };
 
   getImageUrl = id => {
@@ -34,15 +50,33 @@ class App extends Component {
      return  card[0] ? card[0].image : null;
   };
 
+  getImageLocation = id => {
+    let card = this.state.cards.filter(card => card.id === id);
+    console.log('card ', card)
+    return  card[0] ? card[0].location : null;
+  };
+
   setImageUrl = (id, image) => {
     let cards = this.state.cards;
     let card = cards.filter(card => card.id === id);
     console.log('image_', image );
     console.log('card_', card);
     card.image = image;
-//    this.setState({ image }); 
+    this.setState({ image }); 
     console.log('card_- ', card);
   };
+
+  setImageLocation = (id, location) => {
+    let cards = this.state.cards;
+    let card = cards.filter(card => card.id === id);
+    console.log('location_', location );
+    console.log('card_', card);
+    card.location = location;
+    card.id = location;
+    this.setState({ card }); 
+    console.log('card_- ', card);
+  };
+
   // Map over this.state.cards and render a FriendCard component for each card object
   render() {
     return (
@@ -111,8 +145,8 @@ class App extends Component {
     let key = 0;
     for(key=0;key<cards.length; key++)
     {
-      unshuffled[key] = this.getImageUrl(key);
-      console.log('Preimage: ' + unshuffled[key]);
+      unshuffled[key] = this.getImageLocation(key);
+      console.log('PreLocation: ' + unshuffled[key]);
     }
 
     console.log('Pre shuffle: ' + unshuffled);
@@ -123,10 +157,11 @@ class App extends Component {
     {
       if (shuffled[key] != null)
       {
-        console.log('Postimage: ' + shuffled[key]);
-        this.setImageUrl(key, shuffled[key]);
+        console.log('PostLocation: ' + shuffled[key]);
+        this.setImageLocation(key, shuffled[key]);
       }
     }
+    return shuffled;
   }
 
   // 2) On deletion of a card,
