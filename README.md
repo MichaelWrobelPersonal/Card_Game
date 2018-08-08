@@ -1,6 +1,6 @@
 # Card_Game
 
-# Description
+# Description 
 
 A React based game of the card game memory.
 
@@ -16,7 +16,7 @@ The site is built using the React framework
 
 # About the Theme
 
-Shuffled Cards are the them of this project.
+Shuffled Cards are the theme of this project.
 
 # Contributions
 
